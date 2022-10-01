@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_number": "246629109553",
+    "project_id": "cubsappkotlin",
+    "storage_bucket": "cubsappkotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246629109553:android:465db3a2ecc5ea21266a10",
+        "android_client_info": {
+          "package_name": "ru.turbopro.cubes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246629109553-2gph58u3fq1bnhie2tvr52kmctlr54t6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.turbopro.cubes",
+            "certificate_hash": "cc9428119c1f6a00f179bde0c5dad75a5070c674"
+          }
+        },
+        {
+          "client_id": "246629109553-deeok3l538o8sljl9i9ek5uj8gkul0lh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqUPmbYIvvTrRG3P3ugqRf3SgLDendGnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246629109553-deeok3l538o8sljl9i9ek5uj8gkul0lh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246629109553:android:889b85637ba446af266a10",
+        "android_client_info": {
+          "package_name": "ru.turbopro.cubsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246629109553-1e8ususduncnid9nj9jno5l11rovg201.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.turbopro.cubsapp",
+            "certificate_hash": "900b0b4696a5dd18286910d433e67fb4e7abe74c"
+          }
+        },
+        {
+          "client_id": "246629109553-deeok3l538o8sljl9i9ek5uj8gkul0lh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqUPmbYIvvTrRG3P3ugqRf3SgLDendGnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246629109553-deeok3l538o8sljl9i9ek5uj8gkul0lh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246629109553:android:81d74c6d3c4e0239266a10",
+        "android_client_info": {
+          "package_name": "ru.turbopro.cubsappkotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246629109553-mbrjtmvnrhft11rqe5of25pcotu9mbt4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.turbopro.cubsappkotlin",
+            "certificate_hash": "900b0b4696a5dd18286910d433e67fb4e7abe74c"
+          }
+        },
+        {
+          "client_id": "246629109553-deeok3l538o8sljl9i9ek5uj8gkul0lh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqUPmbYIvvTrRG3P3ugqRf3SgLDendGnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246629109553-deeok3l538o8sljl9i9ek5uj8gkul0lh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

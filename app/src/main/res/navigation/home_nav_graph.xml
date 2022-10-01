@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="ru.turbopro.cubes.ui.shop.ShopFragment"
+        android:label="fragment_shop"
+        tools:layout="@layout/fragment_shop">
+        <action
+            android:id="@+id/action_goto_addProduct"
+            app:destination="@id/addEditProductFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_seeProduct"
+            app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditProductFragment"
+        android:name="ru.turbopro.cubes.ui.shop.AddEditProductFragment"
+        android:label="AddProductFragment"
+        tools:layout="@layout/fragment_add_edit_product">
+        <argument
+            android:name="categoryName"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="isEdit"
+            app:argType="boolean"
+            app:nullable="false" />
+        <argument
+            android:name="productId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_addProductFragment_to_homeFragment"
+            app:destination="@id/shopFragment"
+            app:popUpTo="@id/shopFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="ru.turbopro.cubes.ui.main.ProductDetailsFragment"
+        android:label="ProductDetailsFragment"
+        tools:layout="@layout/fragment_product_details">
+        <action
+            android:id="@+id/action_productDetailsFragment_to_homeFragment"
+            app:destination="@id/shopFragment"
+            app:popUpTo="@id/shopFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="productId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productDetailsFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="ru.turbopro.cubes.ui.shop.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_selectAddressFragment"
+            app:destination="@id/selectAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectAddressFragment"
+        android:name="ru.turbopro.cubes.ui.shop.SelectAddressFragment"
+        android:label="fragment_select_address"
+        tools:layout="@layout/fragment_select_address">
+        <action
+            android:id="@+id/action_selectAddressFragment_to_addEditAddressFragment"
+            app:destination="@id/addEditAddressFragment" />
+        <action
+            android:id="@+id/action_selectAddressFragment_to_selectPaymentFragment"
+            app:destination="@id/selectPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditAddressFragment"
+        android:name="ru.turbopro.cubes.ui.shop.AddEditAddressFragment"
+        android:label="fragment_add_edit_address"
+        tools:layout="@layout/fragment_add_edit_address">
+        <argument
+            android:name="isEdit"
+            app:argType="boolean" />
+        <argument
+            android:name="addressId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="ru.turbopro.cubes.ui.main.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favoritesFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/selectPaymentFragment"
+        android:name="ru.turbopro.cubes.ui.shop.SelectPaymentFragment"
+        android:label="fragment_select_payment"
+        tools:layout="@layout/fragment_select_payment">
+        <action
+            android:id="@+id/action_selectPaymentFragment_to_orderSuccessFragment"
+            app:destination="@id/orderSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderSuccessFragment"
+        android:name="ru.turbopro.cubes.ui.main.OrderSuccessFragment"
+        android:label="fragment_order_success"
+        tools:layout="@layout/fragment_order_success">
+        <action
+            android:id="@+id/action_orderSuccessFragment_to_homeFragment"
+            app:destination="@id/shopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="ru.turbopro.cubes.ui.main.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_accountFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="ru.turbopro.cubes.ui.main.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_ordersFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="ru.turbopro.cubes.ui.main.OrderDetailsFragment"
+        android:label="fragment_order_details"
+        tools:layout="@layout/fragment_order_details">
+        <argument
+            android:name="orderId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="ru.turbopro.cubes.ui.shop.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address">
+        <action
+            android:id="@+id/action_addressFragment_to_addEditAddressFragment"
+            app:destination="@id/addEditAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.turbopro.cubes.ui.main.home.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="ru.turbopro.cubes.ui.main.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_userTopFragment"
+            app:destination="@id/userTopFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_addressFragment"
+            app:destination="@id/addressFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="ru.turbopro.cubes.ui.main.home.events.EventsFragment"
+        android:label="fragment_events"
+        tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/action_eventsFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_eventsFragment_to_addEditEventFragment"
+            app:destination="@id/addEditEventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userTopFragment"
+        android:name="ru.turbopro.cubes.ui.main.home.topUsers.UserTopFragment"
+        android:label="fragment_user_top"
+        tools:layout="@layout/fragment_user_top" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.turbopro.cubes.ui.main.home.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="ru.turbopro.cubes.ui.main.home.events.EventDetailFragment"
+        android:label="fragment_event_detail"
+        tools:layout="@layout/fragment_event_detail" />
+    <fragment
+        android:id="@+id/addEditEventFragment"
+        android:name="ru.turbopro.cubes.ui.main.home.events.AddEditEventFragment"
+        android:label="AddEditEventFragment"
+        tools:layout="@layout/fragment_add_edit_event">
+        <action
+            android:id="@+id/action_addEditEventFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment"
+            app:popUpTo="@id/eventsFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>
