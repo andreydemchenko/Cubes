@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import ru.turbopro.cubes.data.Result
 import ru.turbopro.cubes.data.Result.Error
 import ru.turbopro.cubes.data.Result.Success
@@ -12,15 +13,18 @@ import ru.turbopro.cubes.data.UserData
 import ru.turbopro.cubes.data.source.UserDataSource
 import ru.turbopro.cubes.data.utils.EmailMobileData
 import ru.turbopro.cubes.data.utils.OrderStatus
-import kotlinx.coroutines.tasks.await
+import ru.turbopro.cubes.getCurrentTime
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AuthRemoteDataSource : UserDataSource {
 	private val firebaseDb: FirebaseFirestore = Firebase.firestore
 
 	private fun usersCollectionRef() = firebaseDb.collection(USERS_COLLECTION)
+	private fun emailsIdsCollectionRef() = firebaseDb.collection(EMAILS_IDS_COLLECTION)
 	private fun allEmailsMobilesRef() =
 		firebaseDb.collection(USERS_COLLECTION).document(EMAIL_MOBILE_DOC)
-
+	private fun visitsRef() = firebaseDb.collection(VISITS)
 
 	override suspend fun getUserById(userId: String): Result<UserData?> {
 		val resRef = usersCollectionRef().whereEqualTo(USERS_ID_FIELD, userId).get().await()
@@ -30,7 +34,6 @@ class AuthRemoteDataSource : UserDataSource {
 			Error(Exception("User Not Found!"))
 		}
 	}
-
 
 	override suspend fun addUser(userData: UserData) {
 		usersCollectionRef().add(userData.toHashMap())
@@ -49,6 +52,59 @@ class AuthRemoteDataSource : UserDataSource {
 	override suspend fun getUserByEmail(email: String): UserData =
 		usersCollectionRef().whereEqualTo(USERS_EMAIL_FIELD, email).get().await()
 			.toObjects(UserData::class.java)[0]
+
+	override suspend fun getLessonNameByCode(qrCode: String): String? {
+		val data = visitsRef().document(QRCODES_DOC).get().await()
+		val map = mutableMapOf<String, String>()
+		map.putAll(data?.data as Map<String, String>)
+		var lessonName: String? = null
+		for ((key, value) in map) {
+			if (value == qrCode) lessonName = key
+			Log.d("AuthRemote", "key = $key, value = $value")
+		}
+
+		Log.d("AuthRemote", "lesson name = $lessonName, qrCode = $qrCode")
+		return lessonName
+	}
+
+	override suspend fun isUserNotVisitedLesson(lessonName: String, userId: String): Boolean {
+		val data = visitsRef().document(lessonName).get().await()
+		val map = mutableMapOf<String, String>()
+		var isNotVisited = false
+		if (data.exists()) {
+			map.putAll(data?.data as Map<String, String>)
+			Log.d("AuthRemote","map === $map")
+			isNotVisited = !map.containsKey(userId)
+			Log.d("AuthRemote", "isUserNotVisitedLesson data.exists")
+		} else {
+			map[userId] = getCurrentTime()
+			isNotVisited = true
+			visitsRef().document(lessonName+"").set(map).await()
+			Log.d("AuthRemote", "isUserNotVisitedLesson data doesn't exists")
+		}
+		return isNotVisited
+	}
+
+	override suspend fun addUserToLesson(lessonName: String, userId: String) {
+		val data = visitsRef().document(lessonName).get().await()
+		val map = mutableMapOf<String, String>()
+		map.putAll(data?.data as Map<String, String>)
+		map[userId] = getCurrentTime()
+		visitsRef().document(lessonName).set(map).await()
+		Log.d("AuthRemote", "addUserToLesson")
+	}
+
+	override suspend fun addPointsForVisiting(points: Int, userId: String) {
+		val userRef = usersCollectionRef().whereEqualTo(USERS_ID_FIELD, userId).get().await()
+		if (!userRef.isEmpty) {
+			val docId = userRef.documents[0].id
+			val oldPoints =
+				userRef.documents[0].get(USERS_POINTS_FIELD) as Long
+			val newPoints = oldPoints + points
+			usersCollectionRef().document(docId)
+				.update(USERS_POINTS_FIELD, newPoints)
+		}
+	}
 
 	override suspend fun getOrdersByUserId(userId: String): Result<List<UserData.OrderItem>?> {
 		val userRef = usersCollectionRef().whereEqualTo(USERS_ID_FIELD, userId).get().await()
@@ -238,10 +294,6 @@ class AuthRemoteDataSource : UserDataSource {
 		}
 	}
 
-	override suspend fun updateUserPoints(userId: String, newPoints: Int) {
-
-	}
-
 	override suspend fun setStatusOfOrderByUserId(orderId: String, userId: String, status: String) {
 		// update on customer and owner
 		val userRef = usersCollectionRef().whereEqualTo(USERS_ID_FIELD, userId).get().await()
@@ -299,6 +351,9 @@ class AuthRemoteDataSource : UserDataSource {
 
 	companion object {
 		private const val USERS_COLLECTION = "users"
+		private const val EMAILS_IDS_COLLECTION = "emailsUserIds"
+		private const val VISITS = "visits"
+		private const val QRCODES_DOC = "qrCodes"
 		private const val USERS_ID_FIELD = "userId"
 		private const val USERS_ADDRESSES_FIELD = "addresses"
 		private const val USERS_LIKES_FIELD = "likes"
@@ -307,6 +362,7 @@ class AuthRemoteDataSource : UserDataSource {
 		private const val USERS_MOBILE_FIELD = "mobile"
 		private const val USERS_EMAIL_FIELD = "email"
 		private const val USERS_PWD_FIELD = "password"
+		private const val USERS_POINTS_FIELD = "points"
 		private const val EMAIL_MOBILE_DOC = "emailAndMobiles"
 		private const val EMAIL_MOBILE_EMAIL_FIELD = "emails"
 		private const val EMAIL_MOBILE_MOB_FIELD = "mobiles"

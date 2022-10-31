@@ -65,6 +65,24 @@ class UserLocalDataSource internal constructor(
 			}
 		}
 
+	override suspend fun addPointsForVisiting(points: Int, userId: String) {
+		withContext(ioDispatcher) {
+			try {
+				val uData = userDao.getById(userId)
+				if (uData != null) {
+					val currentPoints = uData.points
+					uData.points = currentPoints + points
+					userDao.updateUser(uData)
+				} else {
+					throw Exception("User Not Found")
+				}
+			} catch (e: Exception) {
+				Log.d("UserLocalSource", "addPointsForVisiting: Error Occurred, ${e.message}")
+				throw e
+			}
+		}
+	}
+
 	override suspend fun getOrdersByUserId(userId: String): Result<List<UserData.OrderItem>?> =
 		withContext(ioDispatcher) {
 			try {

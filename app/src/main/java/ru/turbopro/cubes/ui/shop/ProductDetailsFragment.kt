@@ -179,10 +179,7 @@ class ProductDetailsFragment : Fragment() {
 			}
 		}
 		binding.proDetailsRatingBar.rating = (viewModel.productData.value?.rating ?: 0.0).toFloat()
-		binding.proDetailsPriceTv.text = resources.getString(
-			R.string.pro_details_price_value,
-			viewModel.productData.value?.price.toString()
-		)
+		binding.proDetailsPriceTv.text = viewModel.productData.value?.price.toString()
 		setShoeSizeButtons()
 		setShoeColorsButtons()
 		binding.proDetailsSpecificsText.text = viewModel.productData.value?.description ?: ""

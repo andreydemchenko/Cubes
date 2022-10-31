@@ -1,5 +1,6 @@
 package ru.turbopro.cubes
 
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.math.roundToInt
@@ -76,6 +77,11 @@ internal fun getOfferPercentage(costPrice: Double, sellingPrice: Double): Int {
 internal fun getAddressId(userId: String): String {
 	val uniqueId = UUID.randomUUID().toString()
 	return "$userId-$uniqueId"
+}
+
+internal fun getCurrentTime(): String {
+	val sdf = SimpleDateFormat("hh:mm")
+	return sdf.format(Date())
 }
 
 

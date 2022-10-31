@@ -33,10 +33,20 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MyTheme.Body1"
             android:textColor="@color/black"
+            android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/price_items_label_tv"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/price_items_amount_image_view"
             app:layout_constraintTop_toTopOf="@+id/price_items_label_tv"
-            tools:text="$123.45" />
+            tools:text="123" />
+
+        <ImageView
+            android:id="@+id/price_items_amount_image_view"
+            android:layout_width="20dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ico_cube"
+            app:layout_constraintBottom_toBottomOf="@+id/price_items_amount_tv"
+            app:layout_constraintTop_toTopOf="@+id/price_items_amount_tv"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/price_shipping_label_tv"
@@ -55,10 +65,20 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MyTheme.Body1"
             android:textColor="@color/black"
+            android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/price_shipping_label_tv"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/price_shipping_amount_image_view"
             app:layout_constraintTop_toTopOf="@+id/price_shipping_label_tv"
-            tools:text="$123.45" />
+            tools:text="123" />
+
+        <ImageView
+            android:id="@+id/price_shipping_amount_image_view"
+            android:layout_width="20dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ico_cube"
+            app:layout_constraintBottom_toBottomOf="@+id/price_shipping_amount_tv"
+            app:layout_constraintTop_toTopOf="@+id/price_shipping_amount_tv"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/price_charges_label_tv"
@@ -77,10 +97,20 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MyTheme.Body1"
             android:textColor="@color/black"
+            android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/price_charges_label_tv"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/price_charges_amount_image_view"
             app:layout_constraintTop_toTopOf="@+id/price_charges_label_tv"
-            tools:text="$123.45" />
+            tools:text="123" />
+
+        <ImageView
+            android:id="@+id/price_charges_amount_image_view"
+            android:layout_width="20dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ico_cube"
+            app:layout_constraintBottom_toBottomOf="@+id/price_charges_amount_tv"
+            app:layout_constraintTop_toTopOf="@+id/price_charges_amount_tv"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/card_dotted_divider"
@@ -113,10 +143,20 @@
             android:textAppearance="@style/TextAppearance.MyTheme.Body1"
             android:textColor="@color/blue_accent_300"
             android:textStyle="bold"
+            android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/price_total_label_tv"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/price_total_amount_image_view"
             app:layout_constraintTop_toTopOf="@+id/price_total_label_tv"
-            tools:text="$123.45" />
+            tools:text="123" />
+
+        <ImageView
+            android:id="@+id/price_total_amount_image_view"
+            android:layout_width="20dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ico_cube"
+            app:layout_constraintBottom_toBottomOf="@+id/price_total_amount_tv"
+            app:layout_constraintTop_toTopOf="@+id/price_total_amount_tv"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

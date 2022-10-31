@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import ru.turbopro.cubes.EMAIL_ERROR_TEXT
 import ru.turbopro.cubes.R
 import ru.turbopro.cubes.data.utils.LogInErrors
+import ru.turbopro.cubes.data.utils.extensions.addEmailToNickname
 import ru.turbopro.cubes.databinding.ActivityLoginBinding
 import ru.turbopro.cubes.ui.LoginViewErrors
 import ru.turbopro.cubes.ui.MyOnFocusChangeListener
@@ -96,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onLogin() {
-        val em = binding.loginEmailEditText.text.toString()
+        val em = binding.loginEmailEditText.text.toString().addEmailToNickname()
         val pwd = binding.loginPasswordEditText.text.toString()
 
         viewModel.loginSubmitData(em, pwd)

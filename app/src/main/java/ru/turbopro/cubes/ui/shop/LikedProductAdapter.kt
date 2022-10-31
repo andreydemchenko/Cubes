@@ -26,15 +26,11 @@ class LikedProductAdapter(proList: List<Product>, private val context: Context) 
 				onClickListener.onClick(productData)
 			}
 			binding.productNameTv.text = productData.name
-			binding.productPriceTv.text =
-				context.getString(R.string.pro_details_price_value, productData.price.toString())
+			binding.productPriceTv.text = productData.price.toString()
 			binding.productRatingBar.rating = productData.rating.toFloat()
 			binding.productActualPriceTv.apply {
 				paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-				text = context.getString(
-					R.string.pro_details_actual_strike_value,
-					productData.mrp.toString()
-				)
+				text = productData.mrp.toString()
 			}
 			binding.productOfferValueTv.text = context.getString(
 				R.string.pro_offer_precent_text,

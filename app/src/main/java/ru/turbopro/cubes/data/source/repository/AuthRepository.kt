@@ -124,7 +124,6 @@ class AuthRepository(
 		Log.d(TAG, "on Login: checking mobile and password")
 		var queryResult = mutableListOf<UserData>()
 		try {
-			//queryResult = authRemoteDataSource.getUserByMobileAndPassword(mobile, password)
 			queryResult = authRemoteDataSource.getUserByEmailAndPassword(email, password)
 		} catch (e: Exception) {
 			// No Handling
@@ -424,6 +423,76 @@ class AuthRepository(
 			val localRes = async {
 				Log.d(TAG, "onDelete: deleting cart item from local source")
 				userLocalDataSource.deleteCartItem(itemId, userId)
+			}
+			try {
+				localRes.await()
+				remoteRes.await()
+				Success(true)
+			} catch (e: Exception) {
+				Error(e)
+			}
+		}
+	}
+
+	override suspend fun getLessonNameByCode(qrCode: String): Result<String?> {
+		var result: String? = null
+		return supervisorScope {
+			val remoteRes = async {
+				Log.d(TAG, "getLessonNameByCode: getting lesson name on remote source")
+				result = authRemoteDataSource.getLessonNameByCode(qrCode)
+			}
+			try {
+				remoteRes.await()
+				Success(result)
+			} catch (e: Exception) {
+				Error(e)
+			}
+		}
+	}
+
+	override suspend fun isUserNotVisitedLesson(lessonName: String, userId: String): Result<Boolean> {
+		var result = false
+		return supervisorScope {
+			val remoteRes = async {
+				Log.d(TAG, "isUserNotVisitedLesson: checking if user had already visited on remote source")
+				result = authRemoteDataSource.isUserNotVisitedLesson(lessonName, userId)
+			}
+			try {
+				remoteRes.await()
+				Success(result)
+			} catch (e: Exception) {
+				Error(e)
+			}
+		}
+	}
+
+	override suspend fun addUserToLesson(lessonName: String, userId: String): Result<Boolean> {
+		return supervisorScope {
+			val remoteRes = async {
+				Log.d(TAG, "addUserToLesson: adding user to the lesson from remote source")
+				authRemoteDataSource.addUserToLesson(lessonName, userId)
+			}
+			try {
+				remoteRes.await()
+				Success(true)
+			} catch (e: Exception) {
+				Error(e)
+			}
+		}
+	}
+
+	override suspend fun addPointsForVisitingByUserId(
+		points: Int,
+		userId: String
+	): Result<Boolean> {
+		return supervisorScope {
+			val remoteRes = async {
+				Log.d(TAG, "addPointsForVisitingByUserId: adding points on remote source")
+				authRemoteDataSource.addPointsForVisiting(points, userId)
+			}
+			val localRes = async {
+				Log.d(TAG, "addPointsForVisitingByUserId: adding points on local source")
+				userLocalDataSource.addPointsForVisiting(points, userId)
 			}
 			try {
 				localRes.await()

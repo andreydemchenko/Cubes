@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -89,7 +88,17 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_rating_bar"
-            tools:text="$2000" />
+            tools:text="2000" />
+
+        <ImageView
+            android:id="@+id/product_cubes_image_view"
+            android:layout_width="20dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ico_cube"
+            app:layout_constraintBottom_toBottomOf="@+id/product_price_tv"
+            app:layout_constraintStart_toEndOf="@+id/product_price_tv"
+            app:layout_constraintTop_toTopOf="@+id/product_price_tv" />
 
         <TextView
             android:id="@+id/product_actual_price_tv"

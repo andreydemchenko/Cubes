@@ -46,15 +46,10 @@ class ProductAdapter(proList: List<Any>, userLikes: List<String>, private val co
 				onClickListener.onClick(productData)
 			}
 			proName.text = productData.name
-			proPrice.text =
-				context.getString(R.string.pro_details_price_value, productData.price.toString())
+			proPrice.text = productData.price.toString()
 			proRatingBar.rating = productData.rating.toFloat()
 			proMrp.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-			proMrp.text =
-				context.getString(
-					R.string.pro_details_actual_strike_value,
-					productData.mrp.toString()
-				)
+			proMrp.text = productData.mrp.toString()
 			proOffer.text = context.getString(
 				R.string.pro_offer_precent_text,
 				getOfferPercentage(productData.mrp, productData.price).toString()

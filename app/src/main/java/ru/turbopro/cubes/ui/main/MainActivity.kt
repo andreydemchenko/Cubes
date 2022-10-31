@@ -1,11 +1,9 @@
 package ru.turbopro.cubes.ui.main
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import ru.turbopro.cubes.R
 import ru.turbopro.cubes.data.CubsAppSessionManager

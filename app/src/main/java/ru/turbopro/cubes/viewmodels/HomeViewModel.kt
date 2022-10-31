@@ -17,18 +17,19 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val authRepository =
         (application.applicationContext as CubesApplication).authRepository
 
+    init {
+        viewModelScope.launch {
+            authRepository.hardRefreshUserData()
+            getUserData()
+        }
+    }
+
     private val sessionManager = CubsAppSessionManager(application.applicationContext)
     private val currentUser = sessionManager.getUserIdFromSession()
     val isUserASeller = sessionManager.isUserSeller()
 
     private val _userData = MutableLiveData<UserData?>()
     val userData: LiveData<UserData?> get() = _userData
-
-    init {
-        viewModelScope.launch {
-            authRepository.hardRefreshUserData()
-        }
-    }
 
     //fun getUpcomingEvent() = sessionManager.getUserDataFromSession()
 

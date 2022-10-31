@@ -106,7 +106,17 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pro_details_rating_bar"
-                tools:text="$ 200.99" />
+                tools:text="200" />
+
+            <ImageView
+                android:id="@+id/pro_details_price_image_view"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ico_cube"
+                app:layout_constraintBottom_toBottomOf="@+id/pro_details_price_tv"
+                app:layout_constraintStart_toEndOf="@+id/pro_details_price_tv"
+                app:layout_constraintTop_toTopOf="@+id/pro_details_price_tv" />
 
             <TextView
                 android:id="@+id/pro_details_select_size_label"

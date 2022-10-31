@@ -99,7 +99,17 @@
             app:layout_constraintStart_toEndOf="@+id/product_image_view"
             app:layout_constraintTop_toBottomOf="@+id/cart_product_title_tv"
             app:layout_constraintVertical_bias="1.0"
-            tools:text="$1234.56" />
+            tools:text="1234" />
+
+        <ImageView
+            android:id="@+id/cart_product_image_view"
+            android:layout_width="20dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ico_cube"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cart_product_price_tv"
+            app:layout_constraintTop_toTopOf="@+id/cart_product_price_tv"
+            app:layout_constraintStart_toEndOf="@+id/cart_product_price_tv"/>
 
         <LinearLayout
             android:id="@+id/cart_product_quantity_buttons_layout"

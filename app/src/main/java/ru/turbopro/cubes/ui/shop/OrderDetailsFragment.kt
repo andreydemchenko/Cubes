@@ -121,17 +121,11 @@ class OrderDetailsFragment : Fragment() {
 			getItemsCount(orderData.items).toString()
 		)
 		val itemsPriceTotal = getItemsPriceTotal(orderData.itemsPrices, orderData.items)
-		binding.orderDetailsPaymentLayout.priceItemsAmountTv.text =
-			getString(
-				R.string.price_text,
-				itemsPriceTotal.toString()
-			)
-		binding.orderDetailsPaymentLayout.priceShippingAmountTv.text =
-			getString(R.string.price_text, "0")
-		binding.orderDetailsPaymentLayout.priceChargesAmountTv.text =
-			getString(R.string.price_text, "0")
+		binding.orderDetailsPaymentLayout.priceItemsAmountTv.text =	itemsPriceTotal.toString()
+		binding.orderDetailsPaymentLayout.priceShippingAmountTv.text = "0"
+		binding.orderDetailsPaymentLayout.priceChargesAmountTv.text = "0"
 		binding.orderDetailsPaymentLayout.priceTotalAmountTv.text =
-			getString(R.string.price_text, (itemsPriceTotal + orderData.shippingCharges).toString())
+			(itemsPriceTotal + orderData.shippingCharges).toString()
 	}
 
 	private fun setProductsAdapter(itemsList: List<UserData.CartItem>?) {

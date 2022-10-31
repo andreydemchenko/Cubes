@@ -29,6 +29,18 @@ interface UserDataSource {
 		return mutableListOf()
 	}
 
+	suspend fun getLessonNameByCode(qrCode: String): String? {
+		return null
+	}
+
+	suspend fun isUserNotVisitedLesson(lessonName: String, userId: String): Boolean {
+		return false
+	}
+
+	suspend fun addUserToLesson(lessonName: String, userId: String) {}
+
+	suspend fun addPointsForVisiting(points: Int, userId: String) {}
+
 	suspend fun likeProduct(productId: String, userId: String) {}
 
 	suspend fun dislikeProduct(productId: String, userId: String) {}
@@ -46,8 +58,6 @@ interface UserDataSource {
 	suspend fun deleteCartItem(itemId: String, userId: String) {}
 
 	suspend fun placeOrder(newOrder: UserData.OrderItem, userId: String) {}
-
-	suspend fun updateUserPoints(userId: String, newPoints: Int) {}
 
 	suspend fun setStatusOfOrderByUserId(orderId: String, userId: String, status: String) {}
 
